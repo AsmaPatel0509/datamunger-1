@@ -83,7 +83,7 @@ public class DataMunger {
 		
 		System.out.println("Where: " + Arrays.toString(whereClause));
 //		System.out.println("0 " + whereClause[0]);
-		return whereClause[0];
+		return whereClause[0].trim();
 //		return null;
 	}
 
@@ -441,7 +441,7 @@ public class DataMunger {
 		String comma[]=space[1].split(",");
 		System.out.println("Comma: "+Arrays.toString(comma));
 		
-		return space;
+		return comma;
 	}
 
 }
