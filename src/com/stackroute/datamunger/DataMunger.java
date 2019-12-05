@@ -80,10 +80,21 @@ public class DataMunger {
 	public String getBaseQuery(String queryString) {
 
 		String[] whereClause = queryString.split("where");
+		int whereIndex = queryString.indexOf(" where" );
+		int groupIndex = queryString.indexOf(" group " );
+		int orderIndex = queryString.indexOf(" order " );
 		
 		System.out.println("Where: " + Arrays.toString(whereClause));
 //		System.out.println("0 " + whereClause[0]);
-		return whereClause[0].trim();
+		
+		String result = "";
+		if(groupIndex != -1) {
+			result = queryString.substring(0, groupIndex);
+		}else {
+			result = whereClause[0].trim();
+		}
+		
+		return result;
 //		return null;
 	}
 
@@ -192,10 +203,10 @@ public class DataMunger {
 	public String[] getConditions(String queryString) {
 		
 		String[] resultSplit= {};
-		queryString.toLowerCase();
+		
 		if(queryString.contains(" where "))
 		{
-			resultSplit = queryString.split(" where ");
+			resultSplit = queryString.toLowerCase().split(" where ");
 		}
 		int index=0;
 		String resultString;
