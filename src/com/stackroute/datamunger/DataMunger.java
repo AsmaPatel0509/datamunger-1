@@ -37,7 +37,8 @@ public class DataMunger {
 
 	public String[] getSplitStrings(String queryString) {
 
-		String splitString[] = queryString.split(" ");
+		String splitString[] = queryString.toLowerCase().split(" ");
+		
 		System.out.println("Result: " + Arrays.toString(splitString));
 		return splitString;
 	}
@@ -131,9 +132,9 @@ public class DataMunger {
 	public String getConditionsPartQuery(String queryString) {
 		
 		String[] resultSplit= {};
-		if(queryString.contains("where"))
+		if(queryString.contains(" where "))
 		{
-			resultSplit = queryString.split("where");
+			resultSplit = queryString.split(" where ");
 		}
 		System.out.println("resultSplit: "+ Arrays.toString(resultSplit));
 		System.out.println("Result where: " + resultSplit[1]);
@@ -148,12 +149,12 @@ public class DataMunger {
 //		}
 		int index=0;
 		String resultString;
-		if(resultSplit[1].contains("group"))
+		if(resultSplit[1].contains(" group "))
 		{
-			index = resultSplit[1].indexOf("group");
+			index = resultSplit[1].indexOf(" group ");
 			System.out.println("Index: " + index);
 		}
-		if(resultSplit[1].contains("order"))
+		if(resultSplit[1].contains(" order "))
 		{
 			index = resultSplit[1].indexOf("order");
 			System.out.println("Index: " + index);
@@ -192,9 +193,9 @@ public class DataMunger {
 		
 //		System.out.println("Get Conditions Part Query");
 		String[] resultSplit= {};
-		if(queryString.contains("where"))
+		if(queryString.contains(" where "))
 		{
-			resultSplit = queryString.split("where");
+			resultSplit = queryString.split(" where ");
 		}
 //		System.out.println("resultSplit: "+ Arrays.toString(resultSplit));
 //		System.out.println("Result where: " + resultSplit[1]);
@@ -209,14 +210,14 @@ public class DataMunger {
 //		}
 		int index=0;
 		String resultString;
-		if(resultSplit[1].contains("group"))
+		if(resultSplit[1].contains(" group "))
 		{
-			index = resultSplit[1].indexOf("group");
+			index = resultSplit[1].indexOf(" group ");
 			System.out.println("Index: " + index);
 		}
-		if(resultSplit[1].contains("order"))
+		if(resultSplit[1].contains(" order "))
 		{
-			index = resultSplit[1].indexOf("order");
+			index = resultSplit[1].indexOf(" order ");
 			System.out.println("Index: " + index);
 		}
 		
