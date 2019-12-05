@@ -200,109 +200,16 @@ public class DataMunger {
 	 */
 
 	public String[] getConditions(String queryString) {
-		
-		String[] resultSplit= {};
-		
-		if(queryString.contains(" where "))
-		{
-			resultSplit = queryString.toLowerCase().split(" where ");
+		queryString = queryString.toLowerCase();
+		int pos1 = queryString.indexOf("where");
+		if (pos1 == -1) {
+			return null;
 		}
-		int index=0;
-		String resultString;
-		if(resultSplit[1].contains(" group "))
-		{
-			index = resultSplit[1].indexOf(" group ");
-			System.out.println("Index: " + index);
-		}
-		if(resultSplit[1].contains(" order "))
-		{
-			index = resultSplit[1].indexOf(" order ");
-			System.out.println("Index: " + index);
-		}
-		
-		if(index!=0)
-		{
-			resultString = resultSplit[1].substring(0, index);
-			System.out.println("resultString: " + resultString);
-
-		}
-		else
-		{
-			resultString=resultSplit[1];
-			System.out.println("resultString: "+resultString);
-		}
-		
-		ArrayList<String> list = new ArrayList<String>();
-		
-		int andIndex = resultString.indexOf(" and ");
-		int orIndex = resultString.indexOf(" or ");
-		
-		System.out.println("andIndex: "+andIndex);
-		System.out.println("orIndex: "+orIndex);
-		String substr = "";
-		
-		if(andIndex != -1 && orIndex != -1) {
-			if(andIndex > orIndex) {
-				substr = resultString.substring(0, orIndex);
-				list.add(substr);
-				
-				substr = resultString.substring(orIndex + 4, andIndex);
-				list.add(substr);
-				substr = "";
-				
-				substr = resultString.substring(andIndex + 5, resultString.length());
-				list.add(substr);
-				substr = "";
-			}else {
-				
-//				System.out.println(resultString.substring(0,andIndex));
-				substr = resultString.substring(0, andIndex);
-				list.add(substr);
-				System.out.println("substr" + substr);
-				substr = "";
-				
-				substr = resultString.substring(andIndex + 5, orIndex);
-				list.add(substr);
-				substr = "";
-				
-				substr = resultString.substring(orIndex + 4, resultString.length());
-				list.add(substr);
-				substr = "";
-			}
-		}
-		if(andIndex != -1 && orIndex == -1) {
-			substr = resultString.substring( 0, andIndex);
-			list.add(substr);
-			substr = "";
-			
-			substr = resultString.substring( andIndex+5, resultString.length());
-			list.add(substr); 
-			substr = "";
-		}
-		if(orIndex != -1 && andIndex == -1) {
-			substr = resultString.substring( 0, orIndex);
-			list.add(substr);
-			substr = "";
-			
-			substr = resultString.substring( orIndex + 4, resultString.length());
-			list.add(substr); 
-			substr = "";
-		}
-		
-		//System.out.println("resultConditions: "+Arrays.toString(resultConditions));
-//		Iterator itr=list.iterator(); 
-//		
-//		while(itr.hasNext()){
-//			System.out.println("LIST: ");
-//			System.out.println(itr.next());  
-//		}  
-		String resultConditions[]= new String[list.size()];
-		for(int i=0; i<list.size(); i++) {
-			resultConditions[i] = list.get(i);
-		}
-		System.out.println("Result conditions: " + Arrays.toString(resultConditions));
-		return resultConditions;
+		String [] arr = queryString.split("where")[1].trim().split("group by | order by")[0].trim().split(" and | or ");
+		//System.out.println(Arrays.toString(arr));
+		return arr;
 	}
+
 
 	/*
 	 * This method will extract logical operators(AND/OR) from the query string. The
@@ -403,6 +310,9 @@ public class DataMunger {
 		}
 		if(orderIndex == -1 && groupIndex != -1) {
 			substr = queryString.substring(groupIndex + 10, queryString.length());
+		}
+		if(groupIndex == -1 && orderIndex == -1) {
+			substr = null;
 		}
 		//System.out.println("Query string: " + queryString);
 //		System.out.println("Substr group by: " + substr);
