@@ -290,25 +290,58 @@ public class DataMunger {
 	 */
 
 	public String[] getGroupByFields(String queryString) {
+//		String resultSpace[] = queryString.split(" ");
+//		ArrayList<String> list = new ArrayList<String>();
+//		
+//		int orderIndex = queryString.indexOf(" order ");
+//		int groupIndex = queryString.indexOf(" group ");
+//		String substr = "";
+//		
+//		if(groupIndex != -1 && orderIndex!= -1) {
+//			substr = queryString.substring(groupIndex + 10, orderIndex);
+//			//System.out.println("substr");
+//		}
+//		if(orderIndex == -1 && groupIndex != -1) {
+//			substr = queryString.substring(groupIndex + 10, queryString.length());
+//		}
+//		if(groupIndex == -1 && orderIndex == -1) {
+//			substr = null;
+//		}
+//		//System.out.println("Query string: " + queryString);
+////		System.out.println("Substr group by: " + substr);
+//		
+//		if(substr.contains(",")){
+//			String[] substring = substr.split(",");
+//			for(int i =0; i<substr.length(); i++) {
+//				list.add(substring[i]);
+//			}
+//		}else {
+//			list.add(substr);
+//		}
+//		String groupArray[]= new String[list.size()];
+//		for(int i=0; i<list.size(); i++) {
+//			groupArray[i] = list.get(i).toString();
+//		}
+//		
+//		System.out.println("LISTTTTT: " + list);
+//		System.out.println("Group array: " + Arrays.toString(groupArray));
+//		
+//		return groupArray;
+		
+		
 		String resultSpace[] = queryString.split(" ");
 		ArrayList<String> list = new ArrayList<String>();
 		
-		int orderIndex = queryString.indexOf(" order ");
-		int groupIndex = queryString.indexOf(" group ");
+		int orderIndex = queryString.indexOf(" group ");
 		String substr = "";
-		
-		if(groupIndex != -1 && orderIndex!= -1) {
-			substr = queryString.substring(groupIndex + 10, orderIndex);
+		System.out.println("Group index: " + orderIndex);
+		if(orderIndex!= -1) {
+			substr = queryString.substring(orderIndex + 10, queryString.length());
 			//System.out.println("substr");
 		}
-		if(orderIndex == -1 && groupIndex != -1) {
-			substr = queryString.substring(groupIndex + 10, queryString.length());
-		}
-		if(groupIndex == -1 && orderIndex == -1) {
-			substr = null;
-		}
-		//System.out.println("Query string: " + queryString);
-//		System.out.println("Substr group by: " + substr);
+		
+		System.out.println("Query string: " + queryString);
+		System.out.println("Substr order by: " + substr);
 		
 		if(substr.contains(",")){
 			String[] substring = substr.split(",");
@@ -318,15 +351,13 @@ public class DataMunger {
 		}else {
 			list.add(substr);
 		}
-		String groupArray[]= new String[list.size()];
+		String orderArray[]= new String[list.size()];
 		for(int i=0; i<list.size(); i++) {
-			groupArray[i] = list.get(i).toString();
+			orderArray[i] = list.get(i);
 		}
 		
-		System.out.println("LISTTTTT: " + list);
-		System.out.println("Group array: " + Arrays.toString(groupArray));
+		return orderArray;
 		
-		return groupArray;
 	}
 
 	/*
