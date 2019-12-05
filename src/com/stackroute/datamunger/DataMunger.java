@@ -209,29 +209,36 @@ public class DataMunger {
 	 */
 
 	public String[] getLogicalOperators(String queryString) {
-		
-		String[] resultSpace = queryString.split(" ");
-		String[] resultLogicalOperator = {};
-		
-		ArrayList<String> list = new ArrayList<String>();
-		
-		for(int i =0; i<resultSpace.length; i++) {
-			if(resultSpace[i].equals("and") || resultSpace[i].equals("or")) {
-				list.add(resultSpace[i]);
+		String[] words=queryString.toLowerCase().split(" ");
+		ArrayList<String> s1 = new ArrayList<String>();
+		String[] final2=null;
+		for(int i=0;i<words.length;i++)
+		{
+			//System.out.println(words[i]);
+			if(words[i].equals("and"))
+			{
+				s1.add(words[i]);
+			}
+			if(words[i].equals("or"))
+			{
+				s1.add(words[i]);
+			}
+			if(words[i].equals("not"))
+			{
+				s1.add(words[i]);
 			}
 		}
-		
-//		System.out.println("Query string: " + queryString);
-//		System.out.println("Result space: " + Arrays.toString(resultSpace));
-//		System.out.println("Result list: " + list);
-		
-		String logicalArray[]= new String[list.size()];
-		for(int i=0; i<list.size(); i++) {
-			logicalArray[i] = list.get(i);
+		if(s1.size()>0) {
+		String final1=String.join(" ", s1);
+		 final2=final1.split("[ ]");
+		for(int i=0;i<final2.length;i++)
+		{
+			System.out.println(final2[i]);
 		}
-		
-		return logicalArray;
+		}
+		return final2;
 	}
+
 
 	/*
 	 * This method extracts the order by fields from the query string. Note: 
