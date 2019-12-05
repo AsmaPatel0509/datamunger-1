@@ -333,14 +333,27 @@ public class DataMunger {
 	 */
 
 	public String[] getAggregateFunctions(String queryString) {
-
-		System.out.println("Aggregate query string : " + queryString);
-		String space[]=queryString.split(" ");
-//		System.out.println("Space: "+Arrays.toString(space));
-		String comma[]=space[1].split(",");
-		System.out.println("Comma: "+Arrays.toString(comma));
+		String arr[]=queryString.toLowerCase().split("[, ]");
+		ArrayList<String> ar=new ArrayList();
+		String[] final2=null;
 		
-		return comma;
+		for(int i=0;i<arr.length;i++) {
+			if(arr[i].contains("sum(")|| arr[i].contains("min(") || arr[i].contains("max(")
+					|| arr[i].contains("count(")|| arr[i].contains("avg(")) {
+				
+				ar.add(arr[i]);
+			}
+		}
+		if(ar.size()>0) {
+			String final1=String.join(" ", ar);
+			final2=final1.split("[, ]");
+			for(int i=0;i<final2.length;i++)
+				{
+					System.out.println("aggregate functions: " + final2[i]);
+				}
+			}
+		return final2;
+
 	}
 
 }
