@@ -329,34 +329,34 @@ public class DataMunger {
 //		return groupArray;
 		
 		
-		String resultSpace[] = queryString.split(" ");
-		ArrayList<String> list = new ArrayList<String>();
-		
-		int orderIndex = queryString.indexOf(" group ");
-		String substr = "";
-		System.out.println("Group index: " + orderIndex);
-		if(orderIndex!= -1) {
-			substr = queryString.substring(orderIndex + 10, queryString.length());
-			//System.out.println("substr");
-		}
-		
-		System.out.println("Query string: " + queryString);
-		System.out.println("Substr order by: " + substr);
-		
-		if(substr.contains(",")){
-			String[] substring = substr.split(",");
-			for(int i =0; i<substr.length(); i++) {
-				list.add(substring[i]);
+			String[] words=queryString.toLowerCase().split("[, ]");
+			String[] answer=null;
+			int i1=0;
+			String[] final2=null;
+			ArrayList<String> s1 = new ArrayList<String>();
+			for(int i=0;i<words.length;i++)
+			{
+				if(words[i].equals("group"))
+				{
+					i1=i+2;
+				}
 			}
-		}else {
-			list.add(substr);
-		}
-		String orderArray[]= new String[list.size()];
-		for(int i=0; i<list.size(); i++) {
-			orderArray[i] = list.get(i);
-		}
-		
-		return orderArray;
+			if(i1>0) {
+				for(int i=i1;i<words.length;i++)
+				{
+					//System.out.println(words[i]);
+					s1.add(words[i]);
+				}
+				//		//System.out.println(i1);
+				String final1=String.join(" ", s1);
+				////		System.out.println(s1);
+				 final2=final1.split("[ ]");
+				for(int i=0;i<final2.length;i++)
+				{
+					System.out.println(final2[i]);
+				}
+			}
+			return final2;
 		
 	}
 
