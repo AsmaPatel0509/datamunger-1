@@ -191,23 +191,12 @@ public class DataMunger {
 
 	public String[] getConditions(String queryString) {
 		
-//		System.out.println("Get Conditions Part Query");
 		String[] resultSplit= {};
+		queryString.toLowerCase();
 		if(queryString.contains(" where "))
 		{
 			resultSplit = queryString.split(" where ");
 		}
-//		System.out.println("resultSplit: "+ Arrays.toString(resultSplit));
-//		System.out.println("Result where: " + resultSplit[1]);
-		
-//		String[] resultSpace = resultSplit[1].split(" ");
-//		System.out.println("Space separated: " + Arrays.toString(resultSpace));
-//		
-//		for(int i = 0; i<resultSpace.length; i++) {
-//			if(resultSpace[i].equalsIgnoreCase("group") || resultSpace[i].equalsIgnoreCase("order")) {
-//				
-//			}
-//		}
 		int index=0;
 		String resultString;
 		if(resultSplit[1].contains(" group "))
@@ -251,7 +240,7 @@ public class DataMunger {
 				list.add(substr);
 				substr = "";
 				
-				substr = resultString.substring(andIndex + 5, resultString.length() - 1);
+				substr = resultString.substring(andIndex + 5, resultString.length());
 				list.add(substr);
 				substr = "";
 			}else {
@@ -276,7 +265,7 @@ public class DataMunger {
 			list.add(substr);
 			substr = "";
 			
-			substr = resultString.substring( andIndex+5, resultString.length()-1);
+			substr = resultString.substring( andIndex+5, resultString.length());
 			list.add(substr); 
 			substr = "";
 		}
@@ -285,7 +274,7 @@ public class DataMunger {
 			list.add(substr);
 			substr = "";
 			
-			substr = resultString.substring( orIndex + 4, resultString.length()-1);
+			substr = resultString.substring( orIndex + 4, resultString.length());
 			list.add(substr); 
 			substr = "";
 		}
