@@ -173,7 +173,7 @@ public class DataMunger {
 		
 		if(index!=0)
 		{
-			resultString = resultSplit[1].substring(0, index-1);
+			resultString = resultSplit[1].substring(0, index);
 			System.out.println("resultString: " + resultString);
 
 		}
@@ -223,7 +223,7 @@ public class DataMunger {
 		
 		if(index!=0)
 		{
-			resultString = resultSplit[1].substring(0, index-1);
+			resultString = resultSplit[1].substring(0, index);
 			System.out.println("resultString: " + resultString);
 
 		}
