@@ -141,47 +141,33 @@ public class DataMunger {
 	
 	public String getConditionsPartQuery(String queryString) {
 		
-		String[] resultSplit= {};
-		if(queryString.contains(" where "))
-		{
-			resultSplit = queryString.split(" where ");
-		}
-		System.out.println("resultSplit: "+ Arrays.toString(resultSplit));
-		System.out.println("Result where: " + resultSplit[1]);
+		queryString = queryString.toLowerCase();
+		String resultSplit[] = queryString.split(" ");
 		
-//		String[] resultSpace = resultSplit[1].split(" ");
-//		System.out.println("Space separated: " + Arrays.toString(resultSpace));
-//		
-//		for(int i = 0; i<resultSpace.length; i++) {
-//			if(resultSpace[i].equalsIgnoreCase("group") || resultSpace[i].equalsIgnoreCase("order")) {
-//				
-//			}
-//		}
-		int index=0;
-		String resultString;
-		if(resultSplit[1].contains(" group "))
-		{
-			index = resultSplit[1].indexOf(" group ");
-			System.out.println("Index: " + index);
+		int pos1 = queryString.indexOf("where");
+		if (pos1 == -1) {
+			return null;
 		}
-		if(resultSplit[1].contains(" order "))
-		{
-			index = resultSplit[1].indexOf("order");
-			System.out.println("Index: " + index);
+		String result = "";
+		for(int i = 0; i<resultSplit.length; i++) {
+			if(resultSplit[i].equals("where")) {
+				for(int j=i+1; j<resultSplit.length; j++) {
+					if(resultSplit[j].equals("order") || resultSplit[j].equals("group")) {
+						break;
+					}
+					else {
+						result = result.concat(" " + resultSplit[j]);
+					}
+				}
+				break;
+			}
 		}
 		
-		if(index!=0)
-		{
-			resultString = resultSplit[1].substring(0, index);
-			System.out.println("resultString: " + resultString);
-
-		}
-		else
-		{
-			resultString=resultSplit[1];
-			System.out.println("resultString: "+resultString);
-		}
-		return resultString.toLowerCase().trim();
+		return result.trim();
+		
+		
+		
+		
 	}
 
 	/*
@@ -327,8 +313,12 @@ public class DataMunger {
 		}
 		String groupArray[]= new String[list.size()];
 		for(int i=0; i<list.size(); i++) {
-			groupArray[i] = list.get(i);
+			groupArray[i] = list.get(i).toString();
 		}
+		
+		System.out.println("LISTTTTT: " + list);
+		System.out.println("Group array: " + Arrays.toString(groupArray));
+		
 		return groupArray;
 	}
 
