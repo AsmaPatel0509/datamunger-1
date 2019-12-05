@@ -83,7 +83,7 @@ public class DataMunger {
 		
 		System.out.println("Where: " + Arrays.toString(whereClause));
 //		System.out.println("0 " + whereClause[0]);
-		return whereClause[0].toLowerCase().trim();
+		return whereClause[0].trim();
 //		return null;
 	}
 
@@ -171,7 +171,7 @@ public class DataMunger {
 			resultString=resultSplit[1];
 			System.out.println("resultString: "+resultString);
 		}
-		return resultString;
+		return resultString.toLowerCase();
 	}
 
 	/*
