@@ -79,22 +79,21 @@ public class DataMunger {
 	
 	public String getBaseQuery(String queryString) {
 
-		String[] whereClause = queryString.split("where");
 		int whereIndex = queryString.indexOf(" where" );
 		int groupIndex = queryString.indexOf(" group " );
 		int orderIndex = queryString.indexOf(" order " );
-		
-		System.out.println("Where: " + Arrays.toString(whereClause));
-//		System.out.println("0 " + whereClause[0]);
-		
 		String result = "";
-		if(groupIndex != -1) {
+		if(whereIndex != -1) {
+			result = queryString.substring(0, whereIndex);
+		}else if(groupIndex != -1 && whereIndex == -1){
 			result = queryString.substring(0, groupIndex);
-		}else {
-			result = whereClause[0].trim();
+		}else if(orderIndex!=-1 && whereIndex == -1 && groupIndex == -1){
+			result = queryString.substring(0, orderIndex);
 		}
-		
-		return result;
+		else {
+			result = queryString;
+		}
+		return result.trim();
 //		return null;
 	}
 
@@ -182,7 +181,7 @@ public class DataMunger {
 			resultString=resultSplit[1];
 			System.out.println("resultString: "+resultString);
 		}
-		return resultString.toLowerCase();
+		return resultString.toLowerCase().trim();
 	}
 
 	/*
